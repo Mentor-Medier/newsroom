@@ -3,9 +3,9 @@ Newsroom
 
 A web application for storing and managing news stories.
 
-### Milestones
+## Milestones
 
-1. Phase 1 (Running)
+### Phase 1 (Running)
 
    - Necessary package installation
    
@@ -17,13 +17,13 @@ A web application for storing and managing news stories.
 
    - A page to create new story
 
-2. Phase 2
+### Phase 2
 
    - Add JSON format for each story
 
    - Update story list page to include JSON link
 
-3. Phase 3
+### Phase 3
  
    - Add date field in story form
 
@@ -33,13 +33,13 @@ A web application for storing and managing news stories.
 
    - Update story list page to include XML link
 
-4. Phase 4
+### Phase 4
 
    - Add edit and delete functinoalities for each story
 
    - Delete function should include confirmation alert
    
-### Software Requirements
+## Software Requirements
 
 The application is coded in a Windows 8 (64 bit) machine using PyCharm Professional (Version: 2017.2.3).
 
@@ -68,7 +68,7 @@ In CMD, the above commands are executed like below:
 
 ![Package Installation](Screenshot/Phase1/install_package.png)		
 		
-### Create Database
+### Database Configuration
 
 - From phpMyAdmin create database `newsroom_database`
 
