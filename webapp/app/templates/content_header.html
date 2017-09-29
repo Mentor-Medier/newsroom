@@ -1,0 +1,28 @@
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                {% if information.page_header is defined %}
+                    {{ information.page_header }}
+                {% else %}
+                    Title
+                {% endif %}
+
+                <small>
+                    {% if information.page_description is defined %}
+                        {{ information.page_description }}
+                    {% else %}
+
+                    {% endif %}
+                </small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="active">
+                {% if information.page_header is defined %}
+                    {{ information.page_header }}
+                {% else %}
+                {% endif %}
+
+                </li>
+            </ol>
+        </section>

@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+{% block head %}
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
+{% endblock %}
+{% block content %}
+    <!-- Default box -->
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Add News</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                        title="Collapse">
+                    <i class="fa fa-minus"></i></button>
+            </div>
+        </div>
+        <div class="box-body">
+            {{ data }}
+            <!-- form start -->
+        <form class="form-horizontal" action="/add_news" method="post">
+            {{ form.hidden_tag() }}
+            <div class="box-body">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">
+                        Title
+                    </label>
+                    <div class="col-sm-6">
+                        {{ form.news_title(class="form-control",type="text",required="required") }}
+                        {% for error in form.news_title.errors %}
+                            <span class="label label-danger">[{{ error }}]</span>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">
+                        Body
+                    </label>
+                    <div class="col-sm-6">
+                        {{ form.news_body(class="form-control",placeholder="Place some text here",required="required") }}
+                        {% for error in form.news_body.errors %}
+                            <span class="label label-danger">[{{ error }}]</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">
+                        Author
+                    </label>
+                    <div class="col-sm-6">
+                        {{ form.news_author(class="form-control",type="text",required="required") }}
+                        {% for error in form.news_author.errors %}
+                            <span class="label label-danger">[{{ error }}]</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <input type="reset" class="btn btn-default" value="Reset"/>
+                <input type="submit" id="add_news_submit_btn" class="btn btn-info pull-right"
+                       name="add_news_submit_btn" value="Add News"/>
+            </div>
+            <!-- /.box-footer -->
+        </form>
+
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+            Add News
+        </div>
+        <!-- /.box-footer-->
+    </div>
+    <!-- /.box -->
+{% endblock %}
+{% block script %}
+<!-- AdminLTE App -->
+<script src="{{ url_for('static', filename='dist/js/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
+<script>
+    $(document).ready(function(){
+        $("textarea").wysihtml5();
+    })
+</script>
+{% endblock %}

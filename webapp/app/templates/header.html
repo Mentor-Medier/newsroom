@@ -1,0 +1,64 @@
+<!-- Main Header -->
+<header class="main-header">
+
+    <!-- Logo -->
+    <a href="/" class="logo">
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <span class="logo-mini"><b>{{ information.site_short_name }}</b></span>
+        <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg"><b>{{ information.site_name }}</b></span>
+    </a>
+
+    <!-- Header Navbar -->
+    <nav class="navbar navbar-static-top" role="navigation">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+            <span class="sr-only">Toggle navigation</span>
+        </a>
+        <!-- Navbar Right Menu -->
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+                <!-- Notifications Menu -->
+                <li class="dropdown notifications-menu">
+                    <!-- Menu toggle button -->
+                    <a href="/logout" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-power-off"></i> Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<!-- Left side column. contains the logo and sidebar -->
+<aside class="main-sidebar">
+
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+
+        <!-- Sidebar user panel (optional) -->
+
+        <!-- search form (Optional) -->
+        <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+                <input type="text" name="q" class="form-control" placeholder="Search...">
+                <span class="input-group-btn">
+              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+              </button>
+            </span>
+            </div>
+        </form>
+        <!-- /.search form -->
+
+        <!-- Sidebar Menu -->
+        <ul class="sidebar-menu" data-widget="tree">
+            <li class="header">News Room</li>
+            <!-- Optionally, you can add icons to the links -->
+            <li><a href="/"><i class="fa fa-home"></i> <span>Home</span></a></li>
+            <li><a href="/login"><i class="fa fa-user-secret"></i> <span>Login</span></a></li>
+            <li><a href="/signup"><i class="fa fa-user-plus"></i> <span>Signup</span></a></li>
+            <li><a href="/add_news"><i class="fa fa-plus"></i> <span>Add News</span></a></li>
+        </ul>
+        <!-- /.sidebar-menu -->
+    </section>
+    <!-- /.sidebar -->
+</aside>

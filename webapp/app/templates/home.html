@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+{% block head %}
+{% endblock %}
+{% block content %}
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-aqua">
+                <div class="inner">
+                    {% if count_news is defined %}
+                        <h3>{{ count_news }}</h3>
+                    {% else %}
+                        <h3>0</h3>
+                    {% endif %}
+                    <p>News</p>
+                    <div class="icon">
+                        <i class="ion ion-disc"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-yellow">
+                <div class="inner">
+                    {% if count_user is defined %}
+                        <h3>{{ count_user }}</h3>
+                    {% else %}
+                        <h3>0</h3>
+                    {% endif %}
+                    <p>Users</p>
+                    <div class="icon">
+                        <i class="ion ion-person-stalker"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ./col -->
+    </div>
+    <!-- /.row -->
+
+    <!-- Default box -->
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">News List</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                        title="Collapse">
+                    <i class="fa fa-minus"></i></button>
+            </div>
+        </div>
+        <div class="box-body">
+
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+            News List
+        </div>
+        <!-- /.box-footer-->
+    </div>
+    <!-- /.box -->
+{% endblock %}
+{% block script %}
+{% endblock %}
