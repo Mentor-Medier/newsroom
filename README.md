@@ -3,8 +3,7 @@ Newsroom
 
 A web application for storing and managing news stories.
 
-Milestones
-~~~~~~~~~~
+### Milestones
 
 -  Phase 1 (Running)
 
@@ -40,24 +39,18 @@ Milestones
 
    - Delete function should include confirmation alert
    
-Software Requirements
-~~~~~~~~~~~~~~~~~~~~~~~~~
+### Software Requirements
 
 The application is coded in a Windows 8 (64 bit) machine using PyCharm Professional (Version: 2017.2.3).
 
 The following tools are necessary to run the application:
 
-+----------------------+-----------------+
-| Tool                 | Version         |
-+======================+=================+
-| **Python**           | 3.6.2 (64 bit)  |
-+----------------------+-----------------+
-| **MySQL**            | 10.1.21-MariaDB |
-+----------------------+-----------------+
+- **Python** : 3.6.2 (64 bit)
+- **MySQL** : 10.1.21-MariaDB
 
+I used XAMPP (Version 3.2.2) as it includes both MySQL and phpMyAdmin
 
-Necessary Package Installation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+### Necessary Package Installation
 
 - Install virtual environment
 
@@ -71,10 +64,11 @@ Necessary Package Installation
 
 		$ pip install -r webapp\requirements.txt
 
+In CMD, the above commands are executed like below:
+
 ![Package Installation](Screenshot/Phase1/install_package.png)		
 		
-Create Database
-~~~~~~~~~~~~~~~
+### Create Database
 
 - From phpMyAdmin create database `newsroom_database`
 
@@ -102,10 +96,11 @@ To migrate database run `db_migrate.py`. This script should run after every modi
 
 		$ python db_migrate.py
 
+The relationship between table looks like below in phpMyAdmin
+
 ![Database Creation](Screenshot/Phase1/database.png)		
 		
-To Run the Application
-~~~~~~~~~~~~~~~~~~~~~~
+### To Run the Application
 
 - Activate virtual environment (if not activated)
 
@@ -116,8 +111,7 @@ To Run the Application
 		$ python application.py
 
 
-What is this repository for?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+### What is this repository for?
 
 - Quick summary
 - Version Controlling
@@ -125,7 +119,6 @@ What is this repository for?
 - [Issue Tracking](https://bitbucket.org/arsho/newsroom/issues)
 
 
-Change log
-----------
+### Change log
 
-See `CHANGELOG <https://github.com/arsho/newsroom/blob/master/CHANGELOG.rst>`_.
+See CHANGELOG in [CHANGELOG.rst](https://github.com/arsho/newsroom/blob/master/CHANGELOG.rst)
