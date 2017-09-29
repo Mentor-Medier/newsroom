@@ -5,7 +5,7 @@ A web application for storing and managing news stories.
 
 ### Milestones
 
--  Phase 1 (Running)
+1. Phase 1 (Running)
 
    - Necessary package installation
    
@@ -17,13 +17,13 @@ A web application for storing and managing news stories.
 
    - A page to create new story
 
--  Phase 2
+2. Phase 2
 
    - Add JSON format for each story
 
    - Update story list page to include JSON link
 
--  Phase 3
+3. Phase 3
  
    - Add date field in story form
 
@@ -33,7 +33,7 @@ A web application for storing and managing news stories.
 
    - Update story list page to include XML link
 
--  Phase 4
+4. Phase 4
 
    - Add edit and delete functinoalities for each story
 
@@ -121,4 +121,4 @@ The relationship between table looks like below in phpMyAdmin
 
 ### Change log
 
-See CHANGELOG in [CHANGELOG.rst](https://github.com/arsho/newsroom/blob/master/CHANGELOG.rst)
+See CHANGELOG in CHANGELOG.md
