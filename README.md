@@ -5,7 +5,7 @@ A web application for storing and managing news stories.
 
 ## Milestones
 
-### Phase 1 (Running)
+### Phase 1 (Completed)
 
    - Necessary package installation
    
@@ -13,42 +13,41 @@ A web application for storing and managing news stories.
    
    - Sign up and login system for users
 
-   - A page to list all stored storis
+   - A page to list all stored news
 
-   - A page to create new story
+   - A page to create new news
 
-### Phase 2
+### Phase 2 (Running)
 
-   - Add JSON format for each story
+   - Add JSON format for each news
 
    - Update story list page to include JSON link
 
 ### Phase 3
  
-   - Add date field in story form
+   - Add date field in news form
 
    - Modify database design
    
-   - Add XML format for each story
+   - Add XML format for each news
 
    - Update story list page to include XML link
 
 ### Phase 4
 
-   - Add edit and delete functinoalities for each story
+   - Add edit and delete functinoalities for each news
 
    - Delete function should include confirmation alert
    
 ## Software Requirements
 
-The application is coded in a Windows 8 (64 bit) machine using PyCharm Professional (Version: 2017.2.3).
+The following environment are used to develop the application:
 
-The following tools are necessary to run the application:
-
+- **OS** : Windows 8.1 (64 bit)
+- **IDE** : PyCharm Professional (Version: 2017.2.3)
+- **Database Server** : XAMPP (Version 3.2.2) as it includes both MySQL and phpMyAdmin
 - **Python** : 3.6.2 (64 bit)
 - **MySQL** : 10.1.21-MariaDB
-
-I used XAMPP (Version 3.2.2) as it includes both MySQL and phpMyAdmin
 
 ### Necessary Package Installation
 
@@ -56,7 +55,7 @@ I used XAMPP (Version 3.2.2) as it includes both MySQL and phpMyAdmin
 
 		$ python -m venv newsroom_venv
 
-- Activate virtual environment
+- Activate virtual environment (Change it based on your OS)
 
 		$ newsroom_venv\Scripts\activate.bat
 
@@ -87,7 +86,7 @@ Here my MySQL username is root, password is empty and database name is newsroom_
 
 		$ SQLALCHEMY_DATABASE_URI = 'mysql://root:@localhost/newsroom_database'
 
-- To create the database run `db_create.py`. Run only one time.
+- To create the database run `db_create.py`. Run only after first configuration. It will create migration folder.
 
 		$ python db_create.py
 
@@ -119,6 +118,32 @@ The relationship between table looks like below in phpMyAdmin
 - [Issue Tracking](https://bitbucket.org/arsho/newsroom/issues)
 
 
-### Change log
+### Phase 1 Output
 
-See CHANGELOG in CHANGELOG.md
+- Registration page for new user
+
+![Registration Demo](Screenshot/Phase1/registration.png)
+
+- Login page for existing user
+
+![Login Demo](Screenshot/Phase1/login.png)
+
+- Home page for logged in user
+
+![Dashboard Demo](Screenshot/Phase1/dashboard.png)
+
+- Add news page for adding new news to database
+
+![Add news Demo](Screenshot/Phase1/add_news.png)
+
+- News details page for single news
+
+![News details Demo](Screenshot/Phase1/news_details.png)
+
+- XSS check in address bar using custom error page
+
+![XSS Demo](Screenshot/Phase1/xss.png)
+
+- Database table from phpMyAdmin
+
+![Table Demo](Screenshot/Phase1/database_table.png)

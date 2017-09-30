@@ -6,6 +6,19 @@ class User(db.Model):
     password = db.Column('password', db.String(150))
     full_name = db.Column('full_name', db.String(150))
     news = db.relationship("News", back_populates="user")
+
+    def is_authenticated(self):
+        return True
+
+    def is_active(self):
+        return True
+
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        return str(self.id)
+
     def __repr__(self):
         return '<User %r>' % (self.full_name)
 

@@ -1,14 +1,16 @@
 import hashlib
-from app import app, db
-from flask import render_template, flash, redirect, request
+from flask import render_template, flash, redirect, request, url_for, g, Markup, escape
+from flask_login import login_user, logout_user, current_user, login_required
+from app import app, db, login_manager
 from .forms import author_login_form
 from .forms import author_signup_form
 from .forms import add_news_form
 from .models import User, News
+from config import POSTS_PER_PAGE
+
 import site_information
 
 information = site_information.information
-
 
 def get_hashed_password(user_password):
     salt = "cefalologin"
@@ -16,17 +18,66 @@ def get_hashed_password(user_password):
     hashed_value = hashlib.md5(salted_password.encode())
     return hashed_value.hexdigest()
 
+@login_manager.user_loader
+def load_user(id):
+    return User.query.get(int(id))
+
+@app.before_request
+def before_request():
+    g.user = current_user
+
+@app.errorhandler(404)
+def not_found_error(error):
+    information["site_title"] = "Error"
+    information["page_header"] = "Error"
+    information["page_description"] = "Error 404"
+    return render_template('404.html',information=information,), 404
+
+
+@app.errorhandler(500)
+def internal_error(error):
+    db.session.rollback()
+    information["site_title"] = "Error"
+    information["page_header"] = "Error"
+    information["page_description"] = "Error 500"
+    return render_template('500.html',information=information,), 500
 
 @app.route('/')
 @app.route('/index')
-def index():
-    information["site_title"] = "Home"
-    information["page_header"] = "Home"
-    information["page_description"] = "Newsroom Homepage"
+@app.route('/index/<int:page>')
+@login_required
+def index(page=1):
+    information["site_title"] = "Dashboard"
+    information["page_header"] = "Dashboard"
+    information["page_description"] = ""
+    # news_list = News.query.order_by("id desc").all()
+    news_list = News.query.order_by("id desc").paginate(page, POSTS_PER_PAGE, False)
+    count_user = len(User.query.all())
+    count_news = len(News.query.all())
+
     return render_template(
-        'home.html', information=information
+        'home.html', information=information,
+        news_list=news_list,
+        count_user=count_user,
+        count_news=count_news
     )
 
+@app.route('/news/<news_id>')
+@login_required
+def show_news(news_id):
+    information["site_title"] = "News Details"
+    information["page_header"] = "News Details"
+    information["page_description"] = ""
+    news_details = News.query.filter_by(id=news_id).first()
+    if news_details==None:
+        flash("The news does not exist")
+        return redirect(url_for('index'))
+    else:
+        news_details.news_body = Markup(news_details.news_body)
+        return render_template(
+            'news.html', information=information,
+            news_details = news_details
+        )
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -34,12 +85,29 @@ def login():
     information["page_header"] = "Login Page"
     information["page_description"] = "Showing Login Form"
     form = author_login_form()
-    if form.validate_on_submit():
-        flash('Login requested for email address="%s", password=%s' %
-              (form.email_address.data, form.password.data))
-        return redirect('/login')
-    return render_template('login.html',
-                           form=form, information=information)
+    if g.user is not None and g.user.is_authenticated:
+        return redirect(url_for('index'))
+    if request.method == "GET":
+        return render_template('login.html', form=form, information=information)
+    else:
+        if form.validate_on_submit():
+            email_address = form.email_address.data
+            password = get_hashed_password(form.password.data)
+            existing_user = User.query.filter_by(email_address=email_address).first()
+            if existing_user == None:
+                flash('Email address %s is not registered.' %
+                      (email_address))
+                return redirect(url_for('login'))
+            else:
+                if existing_user.password == password:
+                    login_user(existing_user, remember=True)
+                    return redirect(request.args.get('next') or url_for('index'))
+                else:
+                    flash("Password is incorrect")
+                    return redirect(url_for('login'))
+        else:
+            flash("Form validation failed")
+            return redirect(url_for('login'))
 
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -48,8 +116,11 @@ def signup():
     information["page_header"] = "Signup Page"
     information["page_description"] = "Showing Signup Form"
     form = author_signup_form()
+    if g.user is not None and g.user.is_authenticated:
+        return redirect(url_for('index'))
+
     if request.method == "GET":
-        return render_template('signup.html',
+        return render_template('registration.html',
                                form=form, information=information)
     else:
         if form.validate_on_submit():
@@ -61,18 +132,19 @@ def signup():
                 new_user = User(email_address=email_address, password=password, full_name=full_name)
                 db.session.add(new_user)
                 db.session.commit()
-                flash('New user created with email address %s and the user\'s full name is %s' %
-                      (email_address, full_name))
-                return redirect('/')
+                flash('Welcome %s' % full_name)
+                login_user(new_user)
+                return redirect(url_for('index'))
             else:
                 flash("An user existed using the " + email_address)
-                return redirect('/signup')
+                return redirect(url_for('signup'))
         else:
             flash("Form validation failed")
-            return redirect('/signup')
+            return redirect(url_for('signup'))
 
 
 @app.route('/add_news', methods=['GET', 'POST'])
+@login_required
 def addnews():
     information["site_title"] = "Add News"
     information["page_header"] = "Add News Page"
@@ -84,17 +156,23 @@ def addnews():
                                form=form, information=information)
     else:
         if form.validate_on_submit():
-            news_title = form.news_title.data
-            news_body = form.news_body.data
-            news_author = form.news_author.data
-            news_user_id = "1"
+            news_title = escape(form.news_title.data)
+            news_body = escape(form.news_body.data)
+            news_author = escape(form.news_author.data)
+            news_user_id = current_user.id
             new_news = News(news_title=news_title, news_body = news_body,
                             news_author = news_author, news_user_id=news_user_id)
             db.session.add(new_news)
             db.session.commit()
-            flash('New news created by %s, the title is %s' %
-                  (news_author, news_title))
-            return redirect('/add_news')
+            flash('Created news %s' % news_title)
+            return redirect(url_for('addnews'))
         else:
             flash("Form validation failed")
-            return redirect('/add_news')
+            return redirect(url_for('addnews'))
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('You are logged out.')
+    return redirect(url_for('login'))

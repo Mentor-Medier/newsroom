@@ -15,7 +15,7 @@
                     {% endif %}
                     <p>News</p>
                     <div class="icon">
-                        <i class="ion ion-disc"></i>
+                        <i class="ion ion-compose"></i>
                     </div>
                 </div>
             </div>
@@ -23,7 +23,7 @@
         <!-- ./col -->
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
             <!-- small box -->
-            <div class="small-box bg-yellow">
+            <div class="small-box bg-blue">
                 <div class="inner">
                     {% if count_user is defined %}
                         <h3>{{ count_user }}</h3>
@@ -52,11 +52,31 @@
             </div>
         </div>
         <div class="box-body">
-
+            <ul class="list-unstyled">
+                {% for news in news_list.items %}
+                    <li>
+                        <h4 class="attachment-heading">
+                            <a href="{{ url_for('show_news', news_id=news.id) }}">
+                                <i class="ion ion-compose"></i> {{ news.news_title | e }}
+                            </a>
+                        </h4>
+                    </li>
+                {% endfor %}
+            </ul>
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
-            News List
+            {% if news_list.has_prev %}
+                <a href="{{ url_for('index', page=news_list.prev_num) }}">&lt;&lt; Newer news</a>
+            {% else %}
+                &lt;&lt; Newer news
+            {% endif %}
+            |
+            {% if news_list.has_next %}
+                <a href="{{ url_for('index', page=news_list.next_num) }}">Older news &gt;&gt;</a>
+            {% else %}
+                Older news &gt;&gt;
+            {% endif %}
         </div>
         <!-- /.box-footer-->
     </div>

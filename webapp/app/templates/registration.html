@@ -7,7 +7,7 @@
             <a href="/"><b>News</b>Room</a>
         </div>
         <div class="login-box-body">
-            <p class="login-box-msg">Sign in to start your session</p>
+            <p class="login-box-msg">Register a new membership</p>
             {% with flash_message_list = get_flashed_messages() %}
                 {% if flash_message_list %}
                     <div class="alert alert-info">
@@ -20,7 +20,7 @@
                 {% endif %}
             {% endwith %}
 
-            <form action="/login" method="post">
+            <form action="/signup" method="post">
                 {{ form.hidden_tag() }}
                 <div class="form-group has-feedback">
                     {{ form.email_address(class="form-control",id="email_address",type="email",required="required",placeholder="Email Address") }}
@@ -36,18 +36,25 @@
                         <span class="help-block text-red lead">{{ error }}</span>
                     {% endfor %}
                 </div>
+                <div class="form-group has-feedback">
+                    {{ form.full_name(class="form-control",id="full_name",type="text",required="required",placeholder="Full Name") }}
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    {% for error in form.full_name.errors %}
+                        <span class="help-block text-red lead">{{ error }}</span>
+                    {% endfor %}
+                </div>
                 <div class="row">
                     <div class="col-xs-8">
 
                     </div>
                     <!-- /.col -->
                     <div class="col-xs-4">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
                     </div>
                     <!-- /.col -->
                 </div>
             </form>
-            <a href="/signup" class="text-center">Register a new membership</a>
+            <a href="/login" class="text-center">I already have a membership</a>
         </div>
         <!-- /.login-box-body -->
     </div>
