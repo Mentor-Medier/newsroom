@@ -10,6 +10,7 @@
 
 # Ide preference
 /.idea
+/webapp/.idea/
 
 # PyCache
 /__pycache__
