@@ -11,6 +11,7 @@
 # Ide preference
 /.idea
 /webapp/.idea/
+/webapp/.idea/*
 
 # PyCache
 /__pycache__
