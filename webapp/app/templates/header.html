@@ -4,9 +4,31 @@
     <!-- Logo -->
     <a href="/" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>News</b>Room</span>
+        <span class="logo-mini">
+            {% set count = {'value': 0} %}
+            {% set name_parts = information.site_name.split(' ') %}
+            {%- for part in name_parts -%}
+                {%- if count['value']==0 -%}
+                    <b>{{ part }}</b>
+                {%- else -%}
+                    {{ part }}
+                {%- endif -%}
+                {%- if count.update({'value': (count.value + 1)}) -%} {%- endif -%}
+            {%- endfor -%}
+        </span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>News</b>Room</span>
+        <span class="logo-lg">
+            {% set count = {'value': 0} %}
+            {% set name_parts = information.site_name.split(' ') %}
+            {%- for part in name_parts -%}
+                {%- if count['value']==0 -%}
+                    <b>{{ part }}</b>
+                {%- else -%}
+                    {{ part }}
+                {%- endif -%}
+                {%- if count.update({'value': (count.value + 1)}) -%} {%- endif -%}
+            {%- endfor -%}
+        </span>
     </a>
 
     <!-- Header Navbar -->
@@ -21,7 +43,7 @@
                 <!-- Notifications Menu -->
                 <li class="dropdown notifications-menu">
                     <!-- Menu toggle button -->
-                    <a href="/logout">
+                    <a href="{{ url_for('logout') }}">
                         <i class="fa fa-power-off"></i> Logout
                     </a>
                 </li>
@@ -40,8 +62,8 @@
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu" data-widget="tree">
             <!-- Optionally, you can add icons to the links -->
-            <li><a href="/"><i class="fa fa-home"></i> <span>Home</span></a></li>
-            <li><a href="/add_news"><i class="fa fa-plus"></i> <span>Add News</span></a></li>
+            <li><a href="{{ url_for('index') }}"><i class="fa fa-home"></i> <span>Home</span></a></li>
+            <li><a href="{{ url_for('addnews') }}"><i class="fa fa-plus"></i> <span>Add News</span></a></li>
         </ul>
         <!-- /.sidebar-menu -->
     </section>

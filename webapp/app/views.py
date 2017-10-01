@@ -1,5 +1,5 @@
 import hashlib
-from flask import render_template, flash, redirect, request, url_for, g, Markup, escape
+from flask import render_template, flash, redirect, request, url_for, g, Markup, escape, Response, jsonify
 from flask_login import login_user, logout_user, current_user, login_required
 from app import app, db, login_manager
 from .forms import author_login_form
@@ -7,7 +7,7 @@ from .forms import author_signup_form
 from .forms import add_news_form
 from .models import User, News
 from config import POSTS_PER_PAGE
-
+import json
 import site_information
 
 information = site_information.information
@@ -62,9 +62,9 @@ def index(page=1):
         count_news=count_news
     )
 
-@app.route('/news/<news_id>')
+@app.route('/news/<int:news_id>/<string:response_format>')
 @login_required
-def show_news(news_id):
+def show_news(news_id, response_format):
     information["site_title"] = "News Details"
     information["page_header"] = "News Details"
     information["page_description"] = ""
@@ -73,11 +73,38 @@ def show_news(news_id):
         flash("The news does not exist")
         return redirect(url_for('index'))
     else:
-        news_details.news_body = Markup(news_details.news_body)
-        return render_template(
-            'news.html', information=information,
-            news_details = news_details
-        )
+        if response_format.lower() == "html":
+            news_details.news_body = Markup(news_details.news_body)
+            return render_template(
+                'news.html', information=information,
+                news_details = news_details
+            )
+        elif response_format.lower() == "json":
+            news = {}
+            news["title"] = news_details.news_title
+            news["body"] = news_details.news_body
+            news["author"] = news_details.news_author
+            return jsonify(news)
+        else:
+            flash("Unknown Format")
+            return redirect(url_for('index'))
+
+@app.route('/news/json/<int:news_id>')
+@login_required
+def show_news_json(news_id):
+    information["site_title"] = "News Details"
+    information["page_header"] = "News Details"
+    information["page_description"] = ""
+    news_details = News.query.filter_by(id=news_id).first()
+    if news_details==None:
+        flash("The news does not exist")
+        return redirect(url_for('index'))
+    else:
+        news = {}
+        news["title"] = news_details.news_title
+        news["body"] = news_details.news_body
+        news["author"] = news_details.news_author
+        return jsonify(news)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -176,3 +203,5 @@ def logout():
     logout_user()
     flash('You are logged out.')
     return redirect(url_for('login'))
+
+

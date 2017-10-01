@@ -17,13 +17,13 @@ A web application for storing and managing news stories.
 
    - A page to create new news
 
-### Phase 2 (Running)
+### Phase 2 (Completed)
 
    - Add JSON format for each news
 
    - Update story list page to include JSON link
 
-### Phase 3
+### Phase 3 (Running)
  
    - Add date field in news form
 
@@ -86,12 +86,13 @@ Here my MySQL username is root, password is empty and database name is newsroom_
 
 		$ SQLALCHEMY_DATABASE_URI = 'mysql://root:@localhost/newsroom_database'
 
-- To create the database run `db_create.py`. Run only after first configuration. It will create migration folder.
+- To create the database run `db_create.py`. Run only after first configuration. 
 
 		$ python db_create.py
 
-- To track down the schema changes of database, I have used migration techniques.
-To migrate database run `db_migrate.py`. This script should run after every modification in database schema.
+- To track down the schema changes of database, I have used migration technique.
+Execute `db_upgrade.py` to upgrade the database to the latest revision. 
+This script should run after every modification in database schema.
 
 		$ python db_migrate.py
 
@@ -147,3 +148,17 @@ The relationship between table looks like below in phpMyAdmin
 - Database table from phpMyAdmin
 
 ![Table Demo](Screenshot/Phase1/database_table.png)
+
+### Phase 2 Output
+
+- Listing the news with both JSON and HTML format with pagination
+
+![HTML, JSON List Demo](Screenshot/Phase2/json_in_list.png)
+
+- Sample news in HTML format
+
+![HTML Format](Screenshot/Phase2/html_format.png)
+
+- Sample news in JSON format
+
+![JSON Format](Screenshot/Phase2/json_format.png)
