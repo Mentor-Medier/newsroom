@@ -1,6 +1,6 @@
 WTF_CSRF_ENABLED = True
 SECRET_KEY = 'cefalo-web-assignment'
-
+JSON_SORT_KEYS = False
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 

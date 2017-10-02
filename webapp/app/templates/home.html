@@ -8,11 +8,11 @@
             <!-- small box -->
             <div class="small-box bg-aqua">
                 <div class="inner">
-                    {% if count_news is defined %}
+                    {%- if count_news is defined -%}
                         <h3>{{ count_news }}</h3>
-                    {% else %}
+                    {%- else -%}
                         <h3>0</h3>
-                    {% endif %}
+                    {%- endif -%}
                     <p>News</p>
                     <div class="icon">
                         <i class="ion ion-compose"></i>
@@ -25,11 +25,11 @@
             <!-- small box -->
             <div class="small-box bg-blue">
                 <div class="inner">
-                    {% if count_user is defined %}
+                    {%- if count_user is defined -%}
                         <h3>{{ count_user }}</h3>
-                    {% else %}
+                    {%- else -%}
                         <h3>0</h3>
-                    {% endif %}
+                    {%- endif -%}
                     <p>Users</p>
                     <div class="icon">
                         <i class="ion ion-person-stalker"></i>
@@ -56,8 +56,7 @@
                 <thead>
                 <tr>
                     <th>Title</th>
-                    <th>HTML</th>
-                    <th>JSON</th>
+                    <th colspan="3" class="text-center">Format</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -68,14 +67,22 @@
                                 {{ news.news_title | e }}
                             </h4>
                         </td>
-                        <td>
-                            <a href="{{ url_for('show_news', news_id=news.id, response_format='html') }}" class="btn btn-default">
+                        <td class="text-center">
+                            <a href="{{ url_for('show_news', news_id=news.id, response_format='html') }}"
+                               class="btn btn-default">
                                 <i class="fa fa-html5"></i> HTML
                             </a>
                         </td>
-                        <td>
-                            <a href="{{ url_for('show_news', news_id=news.id, response_format='json') }}" class="btn btn-default">
+                        <td class="text-center">
+                            <a href="{{ url_for('show_news', news_id=news.id, response_format='json') }}"
+                               class="btn btn-default">
                                 <i class="fa fa-jsfiddle"></i> JSON
+                            </a>
+                        </td>
+                        <td class="text-center">
+                            <a href="{{ url_for('show_news', news_id=news.id, response_format='xml') }}"
+                               class="btn btn-default">
+                                <i class="fa fa-code"></i> XML
                             </a>
                         </td>
                     </tr>
@@ -86,19 +93,22 @@
         <!-- /.box-body -->
         <div class="box-footer">
             {% if news_list.has_prev %}
-                <a href="{{ url_for('index', page=news_list.prev_num) }}">
+                <a class="btn btn-default pull-left" href="{{ url_for('index', page=news_list.prev_num) }}">
                     <i class="fa fa-angle-double-left"></i> Newer news
                 </a>
             {% else %}
-                <i class="fa fa-angle-double-left"></i> Newer news
+                <button class="btn btn-default disabled pull-left">
+                    <i class="fa fa-angle-double-left"></i> Newer news
+                </button>
             {% endif %}
-            |
             {% if news_list.has_next %}
-                <a href="{{ url_for('index', page=news_list.next_num) }}">
+                <a class="btn btn-default pull-right" href="{{ url_for('index', page=news_list.next_num) }}">
                     Older news <i class="fa fa-angle-double-right"></i>
                 </a>
             {% else %}
-                Older news <i class="fa fa-angle-double-right"></i>
+                <button class="btn btn-default disabled pull-right">
+                    Older news <i class="fa fa-angle-double-right"></i>
+                </button>
             {% endif %}
         </div>
         <!--&lt;&lt; <i class="fa fa-arrow-left"> &gt;&gt; <i class="fa fa-arrow-right"> /.box-footer-->

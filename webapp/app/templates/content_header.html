@@ -1,22 +1,22 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                {% if information.page_header is defined %}
+                {%- if information.page_header is defined -%}
                     {{ information.page_header }}
-                {% endif %}
+                {%- endif -%}
 
                 <small>
-                    {% if information.page_description is defined %}
+                    {%- if information.page_description is defined -%}
                         {{ information.page_description }}
-                    {% endif %}
+                    {%- endif -%}
                 </small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">
-                {% if information.site_title is defined %}
+                {%- if information.site_title is defined -%}
                     {{ information.site_title }}
-                {% endif %}
+                {%- endif -%}
                 </li>
             </ol>
         </section>

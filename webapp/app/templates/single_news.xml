@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<news>
+    <id>{{ news.id }}</id>
+    <title>{{ news.title }}</title>
+    <body>
+        {{ news.body }}
+    </body>
+    <author>{{ news.author }}</author>
+</news>

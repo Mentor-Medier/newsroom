@@ -1,5 +1,6 @@
 import hashlib
-from flask import render_template, flash, redirect, request, url_for, g, Markup, escape, Response, jsonify
+from flask import render_template, flash, redirect, request, url_for, g, Markup, escape
+from flask import Response, jsonify, make_response
 from flask_login import login_user, logout_user, current_user, login_required
 from app import app, db, login_manager
 from .forms import author_login_form
@@ -73,6 +74,11 @@ def show_news(news_id, response_format):
         flash("The news does not exist")
         return redirect(url_for('index'))
     else:
+        news = {}
+        news["id"] = news_details.id
+        news["title"] = news_details.news_title
+        news["body"] = news_details.news_body
+        news["author"] = news_details.news_author
         if response_format.lower() == "html":
             news_details.news_body = Markup(news_details.news_body)
             return render_template(
@@ -80,31 +86,14 @@ def show_news(news_id, response_format):
                 news_details = news_details
             )
         elif response_format.lower() == "json":
-            news = {}
-            news["title"] = news_details.news_title
-            news["body"] = news_details.news_body
-            news["author"] = news_details.news_author
             return jsonify(news)
+        elif response_format.lower() == "xml":
+            response = make_response(render_template('single_news.xml', news=news))
+            response.headers["Content-Type"] = "text/xml; charset=utf-8"
+            return response
         else:
             flash("Unknown Format")
             return redirect(url_for('index'))
-
-@app.route('/news/json/<int:news_id>')
-@login_required
-def show_news_json(news_id):
-    information["site_title"] = "News Details"
-    information["page_header"] = "News Details"
-    information["page_description"] = ""
-    news_details = News.query.filter_by(id=news_id).first()
-    if news_details==None:
-        flash("The news does not exist")
-        return redirect(url_for('index'))
-    else:
-        news = {}
-        news["title"] = news_details.news_title
-        news["body"] = news_details.news_body
-        news["author"] = news_details.news_author
-        return jsonify(news)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

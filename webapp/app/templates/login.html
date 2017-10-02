@@ -4,7 +4,18 @@
 {% block content %}
     <div class="login-box">
         <div class="login-logo">
-            <a href="/"><b>News</b>Room</a>
+            <a href="{{ url_for('index') }}">
+            {% set count = {'value': 0} %}
+            {% set name_parts = information.site_name.split(' ') %}
+            {%- for part in name_parts -%}
+                {%- if count['value']==0 -%}
+                    <b>{{ part }}</b>
+                {%- else -%}
+                    {{ part }}
+                {%- endif -%}
+                {%- if count.update({'value': (count.value + 1)}) -%} {%- endif -%}
+            {%- endfor -%}
+            </a>
         </div>
         <div class="login-box-body">
             <p class="login-box-msg">Sign in to start your session</p>

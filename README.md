@@ -110,7 +110,20 @@ The relationship between table looks like below in phpMyAdmin
 
 		$ python application.py
 
+		
+### Unit testing
 
+- Activate virtual environment (if not activated)
+
+		$ newsroom_venv\Scripts\activate.bat
+
+- Run the `tests.py`
+
+		$ python tests.py
+
+![Database Creation](Screenshot/Phase3/unittests.png)		
+
+		
 ### What is this repository for?
 
 - Quick summary
@@ -151,10 +164,6 @@ The relationship between table looks like below in phpMyAdmin
 
 ### Phase 2 Output
 
-- Listing the news with both JSON and HTML format with pagination
-
-![HTML, JSON List Demo](Screenshot/Phase2/json_in_list.png)
-
 - Sample news in HTML format
 
 ![HTML Format](Screenshot/Phase2/html_format.png)
@@ -162,3 +171,16 @@ The relationship between table looks like below in phpMyAdmin
 - Sample news in JSON format
 
 ![JSON Format](Screenshot/Phase2/json_format.png)
+
+
+### Phase 3 Output
+
+- Listing the news with both HTML, JSON and XML format with pagination
+
+![HTML, JSON, XML List Demo](Screenshot/Phase3/list.png)
+
+- Sample news in XML format
+
+![XML Format](Screenshot/Phase3/xml_format.png)
+
+
