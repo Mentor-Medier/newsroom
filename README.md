@@ -23,7 +23,7 @@ A web application for storing and managing news stories.
 
    - Update story list page to include JSON link
 
-### Phase 3 (Running)
+### Phase 3 (Completed)
  
    - Add date field in news form
 
@@ -33,7 +33,7 @@ A web application for storing and managing news stories.
 
    - Update story list page to include XML link
 
-### Phase 4
+### Phase 4 (Running)
 
    - Add edit and delete functinoalities for each news
 
@@ -179,8 +179,24 @@ The relationship between table looks like below in phpMyAdmin
 
 ![HTML, JSON, XML List Demo](Screenshot/Phase3/list.png)
 
+- Added date in add news form. 
+Updated the model and then migrated the database using `python db_migrate.py` inside the virtual environment.
+
+![Added date in form](Screenshot/Phase3/add_news_date.png)
+
+- Sample news in HTML format with date
+
+![XML Format](Screenshot/Phase3/html_format_date.png)
+
 - Sample news in XML format
 
 ![XML Format](Screenshot/Phase3/xml_format.png)
 
+- Dashboard can be accessible with or without login. But to add news login is mandatory.
+
+![Open dashboard](Screenshot/Phase3/open_dashboard.png)
+
+- Strong validation in applied all forms. Here is an example of registration form validation.
+
+![Registration validation](Screenshot/Phase3/registration_validation.png)
 

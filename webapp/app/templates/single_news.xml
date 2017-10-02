@@ -6,4 +6,9 @@
         {{ news.body }}
     </body>
     <author>{{ news.author }}</author>
+    {% if news.date!= None -%}
+        <date>{{ news.date }}</date>
+    {% else -%}
+        <date></date>
+    {%- endif %}
 </news>

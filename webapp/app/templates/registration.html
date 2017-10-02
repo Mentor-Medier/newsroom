@@ -23,21 +23,32 @@
             <form action="/signup" method="post">
                 {{ form.hidden_tag() }}
                 <div class="form-group has-feedback">
-                    {{ form.email_address(class="form-control",id="email_address",type="email",required="required",placeholder="Email Address") }}
+                    {{ form.email_address(class="form-control",id="email_address",type="email",required="required",
+                    placeholder="Email Address") }}
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                     {% for error in form.email_address.errors %}
                         <span class="help-block text-red lead">{{ error }}</span>
                     {% endfor %}
                 </div>
                 <div class="form-group has-feedback">
-                    {{ form.password(class="form-control",id="password",type="password",required="required",placeholder="Password") }}
+                    {{ form.password(class="form-control",id="password",type="password",required="required",
+                    placeholder="Password") }}
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                     {% for error in form.password.errors %}
                         <span class="help-block text-red lead">{{ error }}</span>
                     {% endfor %}
                 </div>
                 <div class="form-group has-feedback">
-                    {{ form.full_name(class="form-control",id="full_name",type="text",required="required",placeholder="Full Name") }}
+                    {{ form.repeat_password(class="form-control",id="repeat_password",type="password",
+                    required="required",placeholder="Repeat Password") }}
+                    <span class="glyphicon glyphicon-refresh form-control-feedback"></span>
+                    {% for error in form.repeat_password.errors %}
+                        <span class="help-block text-red lead">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group has-feedback">
+                    {{ form.full_name(class="form-control",id="full_name",type="text",required="required",
+                    placeholder="Full Name") }}
                     <span class="glyphicon glyphicon-user form-control-feedback"></span>
                     {% for error in form.full_name.errors %}
                         <span class="help-block text-red lead">{{ error }}</span>

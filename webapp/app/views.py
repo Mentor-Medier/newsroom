@@ -34,7 +34,6 @@ def not_found_error(error):
     information["page_description"] = "Error 404"
     return render_template('404.html',information=information,), 404
 
-
 @app.errorhandler(500)
 def internal_error(error):
     db.session.rollback()
@@ -46,7 +45,6 @@ def internal_error(error):
 @app.route('/')
 @app.route('/index')
 @app.route('/index/<int:page>')
-@login_required
 def index(page=1):
     information["site_title"] = "Dashboard"
     information["page_header"] = "Dashboard"
@@ -64,7 +62,6 @@ def index(page=1):
     )
 
 @app.route('/news/<int:news_id>/<string:response_format>')
-@login_required
 def show_news(news_id, response_format):
     information["site_title"] = "News Details"
     information["page_header"] = "News Details"
@@ -79,6 +76,7 @@ def show_news(news_id, response_format):
         news["title"] = news_details.news_title
         news["body"] = news_details.news_body
         news["author"] = news_details.news_author
+        news["date"] = news_details.news_date
         if response_format.lower() == "html":
             news_details.news_body = Markup(news_details.news_body)
             return render_template(
@@ -123,8 +121,7 @@ def login():
                     return redirect(url_for('login'))
         else:
             flash("Form validation failed")
-            return redirect(url_for('login'))
-
+            return render_template('login.html', form=form, information=information)
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -156,8 +153,8 @@ def signup():
                 return redirect(url_for('signup'))
         else:
             flash("Form validation failed")
-            return redirect(url_for('signup'))
-
+            return render_template('registration.html',
+                                   form=form, information=information)
 
 @app.route('/add_news', methods=['GET', 'POST'])
 @login_required
@@ -175,22 +172,24 @@ def addnews():
             news_title = escape(form.news_title.data)
             news_body = escape(form.news_body.data)
             news_author = escape(form.news_author.data)
+            news_date = escape(form.news_date.data)
             news_user_id = current_user.id
             new_news = News(news_title=news_title, news_body = news_body,
-                            news_author = news_author, news_user_id=news_user_id)
+                            news_author = news_author, news_date = news_date, news_user_id=news_user_id)
             db.session.add(new_news)
             db.session.commit()
             flash('Created news %s' % news_title)
             return redirect(url_for('addnews'))
         else:
             flash("Form validation failed")
-            return redirect(url_for('addnews'))
+            return render_template('add_news.html',
+                                   form=form, information=information)
 
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
     flash('You are logged out.')
-    return redirect(url_for('login'))
+    return redirect(url_for('index'))
 
 

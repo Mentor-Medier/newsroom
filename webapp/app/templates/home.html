@@ -64,7 +64,7 @@
                     <tr>
                         <td>
                             <h4 class="attachment-heading font-size-130">
-                                {{ news.news_title | e }}
+                                {{ news.news_title | safe }}
                             </h4>
                         </td>
                         <td class="text-center">
@@ -111,7 +111,6 @@
                 </button>
             {% endif %}
         </div>
-        <!--&lt;&lt; <i class="fa fa-arrow-left"> &gt;&gt; <i class="fa fa-arrow-right"> /.box-footer-->
     </div>
     <!-- /.box -->
 {% endblock %}

@@ -27,6 +27,7 @@ class News(db.Model):
     news_title = db.Column('news_title', db.String(150))
     news_body = db.Column('news_body', db.Text())
     news_author = db.Column('news_author', db.String(150))
+    news_date = db.Column('news_date', db.Date())
     news_user_id = db.Column('news_user_id',
                              db.Integer,
                              db.ForeignKey('user.id'))
