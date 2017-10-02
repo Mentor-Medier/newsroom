@@ -100,6 +100,11 @@ The relationship between table looks like below in phpMyAdmin
 
 ![Database Creation](Screenshot/Phase1/database.png)		
 		
+(Updated) The relationship after adding the date field the relationship looks like
+
+![Updated Database](Screenshot/Phase3/updated_database.png)		
+
+		
 ### To Run the Application
 
 - Activate virtual environment (if not activated)
