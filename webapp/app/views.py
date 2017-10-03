@@ -235,6 +235,9 @@ def edit_news(news_id):
         flash("The news does not exist")
         return redirect(referrer)
     else:
+        if current_user.id!= news.news_user_id:
+            flash("You are not authorised to edit this")
+            return redirect(url_for('index'))
         form = add_news_form(obj=news)
         if request.method == "GET":
             return render_template('add_edit_news.html',
@@ -263,6 +266,9 @@ def delete_news():
         news_id = request.form.get('delete_news_id')
         existing_news = News.query.get(news_id)
         if existing_news != None:
+            if current_user.id != existing_news.news_user_id:
+                flash("You are not authorised to delete this")
+                return redirect(url_for('index'))
             flash("Deleted: "+existing_news.news_title)
             db.session.delete(existing_news)
             db.session.commit()
