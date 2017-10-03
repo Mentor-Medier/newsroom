@@ -32,7 +32,6 @@ class News(db.Model):
                              db.Integer,
                              db.ForeignKey('user.id'))
     user = db.relationship('User',
-                            cascade="all,delete",
                             back_populates="news")
     def __repr__(self):
         return '<Post %r>' % (self.news_title)

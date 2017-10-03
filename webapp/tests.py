@@ -13,6 +13,7 @@ class TestCase(unittest.TestCase):
     def setUp(self):
         app.config['TESTING'] = True
         app.config['WTF_CSRF_ENABLED'] = False
+        app.config['SQLALCHEMY_DATABASE_URI']='mysql://newsroom_db_admin:newsroom_db_password@localhost/newsroom_test_db'
         self.tester = app.test_client(self)
         self.email_address = "test@example.com"
         self.password = "password"
@@ -23,6 +24,7 @@ class TestCase(unittest.TestCase):
         self.news_date = "2017-10-02"
         self.news_user_id = "0"
         self.news_id = "0"
+        db.create_all()
 
     def tearDown(self):
         with app.app_context():

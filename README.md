@@ -1,11 +1,13 @@
 Newsroom
 ========
 
+![Final List](Screenshot/Phase4/dashboard.png)
+
 A web application for storing and managing news stories.
 
 ## Milestones
 
-### Phase 1 (Completed)
+### - [x] Phase 1 (Completed)
 
    - Necessary package installation
    
@@ -17,13 +19,13 @@ A web application for storing and managing news stories.
 
    - A page to create new news
 
-### Phase 2 (Completed)
+### - [x] Phase 2 (Completed)
 
    - Add JSON format for each news
 
    - Update story list page to include JSON link
 
-### Phase 3 (Completed)
+### - [x] Phase 3 (Completed)
  
    - Add date field in news form
 
@@ -33,7 +35,7 @@ A web application for storing and managing news stories.
 
    - Update story list page to include XML link
 
-### Phase 4 (Running)
+### - [x] Phase 4 (Completed)
 
    - Add edit and delete functinoalities for each news
 
@@ -45,7 +47,7 @@ The following environment are used to develop the application:
 
 - **OS** : Windows 8.1 (64 bit)
 - **IDE** : PyCharm Professional (Version: 2017.2.3)
-- **Database Server** : XAMPP (Version 3.2.2) as it includes both MySQL and phpMyAdmin
+- **Server** : XAMPP (Version 3.2.2)
 - **Python** : 3.6.2 (64 bit)
 - **MySQL** : 10.1.21-MariaDB
 
@@ -69,10 +71,25 @@ In CMD, the above commands are executed like below:
 		
 ### Database Configuration
 
-- From phpMyAdmin create database `newsroom_database`
+- Open CMD/Terminal/X-term and login as mysql root user. 
+Then create a database user `newsroom_db_admin` with password `newsroom_db_password`, 
+main database, test database and grant all privileges to the user as shown below:
 
-![Database Creation](Screenshot/Phase1/create_database.png)
+```
+$ mysql -u root
+mysql> CREATE USER 'newsroom_db_admin'@'localhost' IDENTIFIED BY 'newsroom_db_password';
+mysql> CREATE DATABASE newsroom_db;
+mysql> GRANT ALL PRIVILEGES ON newsroom_db . * TO 'newsroom_db_admin'@'localhost';
+mysql> CREATE DATABASE newsroom_test_db;
+mysql> GRANT ALL PRIVILEGES ON newsroom_test_db . * TO 'newsroom_db_admin'@'localhost';
+```
 
+This may look like this
+
+![Main Database Configuration](Screenshot/Phase1/database_cmd.png)		
+		
+![Test Database Configuration](Screenshot/Phase1/database_test_cmd.png)				
+		
 - Activate virtual environment (if not activated)
 
 		$ newsroom_venv\Scripts\activate.bat
@@ -81,10 +98,9 @@ In CMD, the above commands are executed like below:
 
 		$ cd webapp
 
-- Change MySQL configuration in `config.py` using own MySQL username, password and database name. 
-Here my MySQL username is root, password is empty and database name is newsroom_database
+- Check MySQL configuration in `config.py` using own MySQL username, password and database name. 
 
-		$ SQLALCHEMY_DATABASE_URI = 'mysql://root:@localhost/newsroom_database'
+- Check test MySQL configuration in `tests.py` using own MySQL username, password and database name. 
 
 - To create the database run `db_create.py`. Run only after first configuration. 
 
@@ -98,11 +114,7 @@ This script should run after every modification in database schema.
 
 The relationship between table looks like below in phpMyAdmin
 
-![Database Creation](Screenshot/Phase1/database.png)		
-		
-(Updated) The relationship after adding the date field the relationship looks like
-
-![Updated Database](Screenshot/Phase3/updated_database.png)		
+![Updated Database](Screenshot/Phase4/database.png)		
 
 		
 ### To Run the Application
@@ -118,6 +130,8 @@ The relationship between table looks like below in phpMyAdmin
 		
 ### Unit testing
 
+- Ensure that you have created test database as mentioned above
+
 - Activate virtual environment (if not activated)
 
 		$ newsroom_venv\Scripts\activate.bat
@@ -126,8 +140,7 @@ The relationship between table looks like below in phpMyAdmin
 
 		$ python tests.py
 
-![Database Creation](Screenshot/Phase3/unittests.png)		
-
+![Unittests](Screenshot/Phase4/unittests.png)		
 		
 ### What is this repository for?
 
@@ -191,7 +204,7 @@ Updated the model and then migrated the database using `python db_migrate.py` in
 
 - Sample news in HTML format with date
 
-![XML Format](Screenshot/Phase3/html_format_date.png)
+![HTML Format with date](Screenshot/Phase3/html_format_date.png)
 
 - Sample news in XML format
 
@@ -205,3 +218,16 @@ Updated the model and then migrated the database using `python db_migrate.py` in
 
 ![Registration validation](Screenshot/Phase3/registration_validation.png)
 
+### Phase 4 Output
+
+- Listing the news with both HTML, JSON and XML format with pagination and edit and delete functionalities
+
+![Final List](Screenshot/Phase4/dashboard.png)
+
+- Edit option of a news.
+
+![Edit option](Screenshot/Phase4/edit.png)
+
+- Delete news after confirmation
+
+![Delete option](Screenshot/Phase4/confirmation_delete.png)

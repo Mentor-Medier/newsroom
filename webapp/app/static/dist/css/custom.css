@@ -1,3 +1,10 @@
 .font-size-130{
     font-size: 130% !important;
 }
+.display-none{
+    display: none;
+}
+.no-top-bottom-margin{
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+}
